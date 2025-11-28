@@ -1,0 +1,52 @@
+# SleepShift — CBT‑I Webapp (starter scaffold)
+
+SleepShift er en mobil‑fokusert, flerspråklig CBT‑I webapp (PWA) bygget med Next.js, Prisma, NextAuth og Stripe. Denne repoen er et startpunkt med autentisering (Google + email), i18n, PWA-manifest, service worker, Stripe webhook og datamodell.
+
+Høydepunkter:
+- Mobiloptimalisert UI (Next.js)
+- PWA støtte (manifest + service worker + install prompt)
+- Google + Email autentisering (NextAuth med Credentials)
+- Prisma datamodell med User (inkludert stripeCustomerId, stripeSubscriptionId, isPremium, osv.)
+- Stripe webhook for abonnementshendelser
+- Global i18n-oversettelsesmappe (EN/NO)
+
+Kom i gang
+1. Installer
+   - node 18+
+   - yarn eller npm
+
+   yarn install
+
+2. Miljøvariabler (.env)
+   - DATABASE_URL=postgresql://...
+   - NEXTAUTH_URL=https://your-app.example
+   - NEXTAUTH_SECRET=secure-random
+   - GOOGLE_CLIENT_ID=...
+   - GOOGLE_CLIENT_SECRET=...
+   - STRIPE_SECRET_KEY=sk_live_...
+   - STRIPE_WEBHOOK_SECRET=whsec_...
+   - STRIPE_PRICE_MONTHLY_ID=price_xxx
+   - STRIPE_PRICE_YEARLY_ID=price_yyy
+
+3. Prisma
+   yarn prisma migrate dev --name init
+   yarn prisma generate
+
+4. Kjør lokalt
+   yarn dev
+
+Viktige filer
+- /prisma/schema.prisma — DB-modell inkl. User
+- /src/i18n — global translation map
+- /public/manifest.json — PWA manifest
+- /public/sw.js — enkel service worker
+- /src/pages/api/stripe/webhook.ts — Stripe webhook
+- /src/pages/api/auth/[...nextauth].ts — NextAuth konfig.
+- /src/pages/api/auth/register.ts — registrer brukere med e-post
+
+Sikkerhet
+- Sett NEXTAUTH_SECRET sterkt
+- Ikke legg Stripe-secrets i repo
+
+Design & produkt
+Følg kravspesifikasjonen for CBT‑I-moduler, SRT-logikk, AI‑coach og paywall‑tekster. Dette repoet gir fundamentet for å bygge ut alle funksjoner.
